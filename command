@@ -80,3 +80,6 @@ sudo apt remove --purge -y qemu-kvm virt-manager libvirt-daemon-system virtinst 
 
 # Suppression dossier libvirt
 sudo rm -rf /var/lib/libvirt
+sudo apt update
+sudo apt autoremove
+sudo apt autoclean
