@@ -1,0 +1,55 @@
+# Installation des paquets.
+
+sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker
+
+kvm-ok
+
+sudo systemctl enable --now libvirtd
+
+sudo systemctl start libvirtd
+
+sudo systemctl status libvirtd
+
+sudo usermod -aG kvm $USER
+
+sudo usermod -aG libvirt $USER
+
+
+
+
+# Ajout du groupe et de l'utilisateur au groupe.
+
+sudo getent group | grep libvirt
+sudo getent group | grep libvirtd
+sudo groupadd --system libvirt
+sudo usermod -a -G libvirt $(whoami)
+sudo adduser `id -un` libvirtd
+sudo adduser `id -un` kvm
+newgrp libvirt
+id $(whoami)
+groups
+
+# Ajouter cette ligne a:
+sudo vim /etc/libvirt/libvirtd.conf
+
+unix_sock_group = "libvirt"
+
+# Ajout des autorisation.
+
+sudo usermod -a -G libvirt $USER
+sudo ls -la /var/run/libvirt/libvirt-sock
+sudo chown root:libvirtd /dev/kvm
+sudo chown $(whoami):$(whoami) /var/run/libvirt/libvirt-sock
+
+# Cheat sheet command
+
+virsh list
+virsh list --inactive
+virsh list --all
+virsh dominfo  nomdelamachine
+virsh net-list --all
+
+virsh domdisplay nomdelamachine
+remote-viewer nomdelamachine
+
+virsh edit nomdelamachine
