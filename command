@@ -76,10 +76,12 @@ virt-install \
 
 ################################################"
 # Tous desinstaller
-sudo apt remove --purge -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
+sudo apt remove --purge -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
 
 # Suppression dossier libvirt
 sudo rm -rf /var/lib/libvirt
+dpkg -l | grep qemu
+sudo apt purge --auto-remove qemu-system-x86
 sudo apt update
 sudo apt autoremove
 sudo apt autoclean
