@@ -1,6 +1,8 @@
 # Installation des paquets.
 
-sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker
+sudo apt update && sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
+
+export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 kvm-ok
 
@@ -10,15 +12,17 @@ sudo systemctl start libvirtd
 
 sudo systemctl status libvirtd
 
-sudo usermod -aG kvm $USER
+lsmod | grep kvm
 
-sudo usermod -aG libvirt $USER
+
 
 
 
 
 # Ajout du groupe et de l'utilisateur au groupe.
 
+sudo usermod -aG kvm $USER
+sudo usermod -aG libvirt $USER
 sudo getent group | grep libvirt
 sudo getent group | grep libvirtd
 sudo groupadd --system libvirt
@@ -53,3 +57,20 @@ virsh domdisplay nomdelamachine
 remote-viewer nomdelamachine
 
 virsh edit nomdelamachine
+
+
+# creer un VM
+
+
+virt-install \
+-n deb11 \
+--description "Test VM with RHEL 6" \
+--os-type=Linux \
+--os-variant=rhel6 \
+--ram=2048 \
+--vcpus=2 \
+--disk path=/var/lib/libvirt/images/deb11.img,bus=virtio,size=10 \
+--graphics none \
+--cdrom /var/debian-11.7.0-amd64-DVD-1.iso\
+--network bridge:br0
+
