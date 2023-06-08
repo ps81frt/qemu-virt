@@ -73,3 +73,10 @@ virt-install \
 --graphics none \
 --cdrom /var/debian-11.7.0-amd64-DVD-1.iso\
 --network bridge:br0
+
+################################################"
+# Tous desinstaller
+sudo apt remove --purge -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
+
+# Suppression dossier libvirt
+sudo rm -rf /var/lib/libvirt
