@@ -1,6 +1,6 @@
 # Installation des paquets.
 
-sudo apt update && sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer sudo cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
+sudo apt update && sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils virt-viewer cpu-checker libvirt-daemon qemu qemu-system dialog whiptail
 
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
